@@ -17,12 +17,12 @@ function setup() {
 	
 
 	packageSprite=createSprite(width/2, 80, 10,10);
-	packageSprite.addImage(packageIMG)
-	packageSprite.scale=0.2
+	packageSprite.addImage(packageIMG);
+	packageSprite.scale=0.2;
 
 	helicopterSprite=createSprite(width/2, 200, 10,10);
-	helicopterSprite.addImage(helicopterIMG)
-	helicopterSprite.scale=0.6
+	helicopterSprite.addImage(helicopterIMG);
+	helicopterSprite.scale=0.6;
 
 	groundSprite=createSprite(width/2, height-35, width,10);
 	groundSprite.shapeColor=color(255)
@@ -73,27 +73,30 @@ function draw() {
  
   packageSprite.x= packageBody.position.x ;
   packageSprite.y= packageBody.position.y; 
-  if(packageBody.position.x > 400  && packageBody.x > 400){
-	Matter.Body.setStatic(packageBody,true);  
-  }
+  
 
-
-  if(keyCode === LEFT_ARROW){
-	  helicopterSprite.x = helicopterSprite.x+5;
-  }
-
-  if(keyCode === RIGHT_ARROW){
-	helicopterSprite.x = helicopterSprite.x-5;
-}
-
-  if(keyCode === DOWN_ARROW){
-	Matter.Body.setStatic(packageBody,false);
-	}
-translate(helicopterSprite.x,helicopterSprite.y);
 	
   
   drawSprites();
   
-  
+
  
+}
+function keyPressed(){
+	
+	  if(keyCode === LEFT_ARROW){
+		  helicopterSprite.x = helicopterSprite.x-20;
+		  translation = {x:-20,y:0};
+		  Matter.Body.translate(packageBody,translation);
+	  }
+	
+	  if(keyCode === RIGHT_ARROW){
+		helicopterSprite.x = helicopterSprite.x+20;
+		translation = {x:+20,y:0};
+		Matter.Body.translate(packageBody,translation);
+	}
+	
+	  if(keyCode === DOWN_ARROW){
+		Matter.Body.setStatic(packageBody,false);
+		}
 }
